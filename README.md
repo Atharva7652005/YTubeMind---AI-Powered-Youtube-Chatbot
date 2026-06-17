@@ -1,157 +1,174 @@
-# Gen AI 
+# YTubeMind
 
-## Overview
-
-This repository collects practical LangChain and retrieval-augmented generation (RAG) experiments in Python and JavaScript. It includes document loaders, prompt design, chain composition, vector stores, structured output, and a focused YouTube chatbot project.
-
-## Main Topics and Folder Summaries
-
-### Langchain Core Examples
-
-- `Langchain_Chains/`
-  - Examples of chain compositions using LangChain.
-  - `simple_chain.py`: basic prompt → model → parser pipeline.
-  - `sequential_chain.py`: sequential execution of multiple prompts.
-  - `parallel_chain.py`: split work into parallel outputs.
-  - `conditional_chain.py`: conditional branching based on model output.
-
-- `Langchain_Runnables/`
-  - Demonstrates runnable abstractions for advanced chain control.
-  - `runnable_parallel.py`, `runnable_sequence.py`, `runnable_branch.py`, `runnable_lambda.py`, `runnable_passthrough.py`.
-  - These examples show how to compose and route tasks inside LangChain.
-
-- `Langchain_Models/`
-  - Model examples and quick demos for LLMs, chat models, and embedding models.
-  - Includes notebooks and scripts showing usage of OpenAI, Anthropic, Google, and Hugging Face model interfaces.
-
-### Document Loading and Text Processing
-
-- `Document_Loaders_Langchain/`
-  - Document ingestion examples for multiple sources.
-  - `pdf_loader.py`, `text_loader.py`, `csv_loader.py`, `directory_loader.py`, `web_base_loader.py`.
-  - Contains sample docs and notebooks for loading content into LangChain workflows.
-
-- `Text_Splitters_Langchain/`
-  - Various text splitting strategies for preparing long documents.
-  - `length_based.py`, `markdown_splitting.py`, `python_code_splitting.py`, `semantic_embedding_splitting.py`, `text_structure_based.py`.
-  - These scripts show how to chunk text for embeddings and retrieval.
-
-- `Vector_Stores/`
-  - Vector store usage examples and notebook experiments.
-  - `Vector_Stores_in_Langchain_ChromaDB.ipynb`, `Vector_Stores_in_Langchain_FIASS_DB.ipynb`.
-
-### Retrieval and RAG
-
-- `Langchain_Retrievers/`
-  - Retriever-related experiments and retrieval patterns for LangChain.
-
-- `RAG/` and `RAG_2/`
-  - Retrieval-Augmented Generation demos using JavaScript.
-  - Includes `index.js`, `query.js`, `package.json`, and Pinecone integration examples.
-  - `RAG_2/` is a second version with a similar retrieval workflow and environment setup.
-
-### Prompting and Structured Output
-
-- `Langchain_Prompts/`
-  - Prompt templates and prompt UI examples.
-  - `chat_prompt_template.py`, `chatbot.py`, `messages.py`, `message_placeholder.py`, `prompts_ui.py`, `template.json`.
-  - Useful for building chat-style prompts and custom prompt layouts.
-
-- `Langchain_Outparser/`
-  - Parsers for extracting and structuring model responses.
-  - `json_output_parser.py`, `pydantic_output_parser.py`, `stroutput_parser.py`, `stroutparser2.py`.
-  - Demonstrates how to enforce output shape and parse responses.
-
-- `Langchain_Structured_Output/`
-  - Structured output examples using JSON schema and typed parsing.
-  - `json_schema.json`, `structured_output_json_schema.py`, `structured_output_pydantic.py`, `structured_output_typedict.py`.
-
-### Chatbot and Application Demos
-
-- `Chatbot/`
-  - Chat application examples likely built with Python.
-  - `app.py`, `main.py` show chat framework patterns and how to connect UI with LLM logic.
-
-- `README.md` (this file)
-  - A consolidated summary of repository topics and usage.
-
-### Notebooks and Learning Examples
-
-- Root notebooks:
-  - `(Demo)Langchain_using_Runnable.ipynb`
-  - `(Demo)Langchain_without_Runnable.ipynb`
-
-- Feature-specific notebooks in subfolders for interactive experiments.
-
-## YouTube Chatbot Project
-
-This repository includes a dedicated YouTube video chatbot feature with two main files:
-
-### `Youtube_Chatbot_model.py`
-
-This script builds a standalone YouTube chatbot pipeline:
-
-- Extracts the YouTube video ID from a URL.
-- Downloads transcript text using `youtube_transcript_api`.
-- Splits the transcript into chunks using `RecursiveCharacterTextSplitter`.
-- Converts chunks into embeddings with Google Gemini embeddings.
-- Stores embeddings in a FAISS vector store.
-- Uses LangChain retrieval to find the most relevant transcript chunks.
-- Sends retrieved context into a Google Gemini chat model for answer generation.
-- Includes a sample prompt that restricts answers to transcript content.
-
-This file is ideal for experimentation and for quickly verifying that transcript retrieval and generation work together.
-
-### `YTChatbot_app.py`
-
-This file builds a Streamlit web app named `YouTube Video Chatbot` with:
-
-- A URL input field for pasting YouTube links.
-- Transcript fetching and language fallback for Hindi/English.
-- Chunking and embedding of the transcript.
-- FAISS-based similarity retrieval for user questions.
-- A Google Gemini chat model for answering user queries from the video.
-- An English translation helper for transcript content.
-- A live chat UI rendered through HTML components.
-- Transcript display in original or translated English form.
-
-This app is the best user-facing version of the project, combining retrieval, generative response, and UI.
-
-## Getting Started
-
-1. Create a Python virtual environment and activate it.
-2. Install packages from the relevant requirements file or your own environment.
-3. Add API keys to `.env`:
-   - `GEMINI_API_KEY`
-   - `GROQ_API_KEY` (if using Groq examples)
-   - other provider keys as needed.
-4. Run the Streamlit app:
-   ```bash
-   streamlit run YTChatbot_app.py
-   ```
-5. Paste a YouTube URL and ask questions about the video.
-
-## Notes
-
-- This repository is a learning and experimentation workspace for generative AI workflows.
-- Many examples rely on external APIs and private keys stored in `.env`.
-- Use the notebooks and scripts to explore different LangChain components and prompt styles.
+YTubeMind is an AI-powered YouTube chatbot that transforms YouTube videos into interactive knowledge sources. Users can provide a YouTube video URL, view its transcript, access English translations for multilingual videos, and ask natural language questions about the video content. The application leverages Retrieval-Augmented Generation (RAG) to deliver accurate, context-aware responses grounded in the video's transcript.
 
 ---
 
-## Folder Quick Reference
+## Features
 
-- `Chatbot/` — Chat application demos
-- `Document_Loaders_Langchain/` — Loaders for PDF, CSV, text, directory, and web content
-- `Langchain_Chains/` — Chain composition examples
-- `Langchain_Models/` — Model examples and notebook demos
-- `Langchain_Outparser/` — Output parsing and structured response handling
-- `Langchain_Prompts/` — Prompt templates and chat prompt building
-- `Langchain_Retrievers/` — Retriever examples
-- `Langchain_Runnables/` — Runnable and branching LangChain patterns
-- `Langchain_Structured_Output/` — JSON schema + Pydantic output examples
-- `RAG/`, `RAG_2/` — JavaScript retrieval-augmented generation demos
-- `Text_Splitters_Langchain/` — Text splitting strategies
-- `Vector_Stores/` — Vector store experiments
+* Extract transcripts directly from YouTube videos.
+* Support for multilingual transcripts with English translation.
+* Chat with any YouTube video using natural language queries.
+* Semantic search powered by vector embeddings and FAISS.
+* Context-aware question answering using Gemini 2.5 Flash.
+* Interactive transcript viewer with language toggle support.
+* Streamlit-based responsive web interface.
+* Retrieval-Augmented Generation (RAG) architecture to reduce hallucinations.
 
-If you want, I can also split this README into a separate `YOUTUBE_CHATBOT_README.md` for the chatbot project alone.
+---
+
+## System Architecture
+
+```text
+YouTube URL
+     │
+     ▼
+Transcript Extraction
+     │
+     ▼
+Text Chunking
+     │
+     ▼
+Gemini Embeddings
+     │
+     ▼
+FAISS Vector Store
+     │
+     ▼
+Retriever
+     │
+     ▼
+Gemini 2.5 Flash
+     │
+     ▼
+Chat Response
+```
+
+---
+
+## Tech Stack
+
+### Frontend
+
+* Streamlit
+
+### Backend
+
+* Python
+
+### AI & NLP
+
+* Google Gemini 2.5 Flash
+* Gemini Embeddings
+* LangChain
+
+### Vector Database
+
+* FAISS
+
+### Data Processing
+
+* YouTube Transcript API
+* Recursive Character Text Splitter
+
+### Environment Management
+
+* Python Dotenv
+
+---
+
+## Project Structure
+
+```text
+YTubeMind/
+│
+├── app.py
+├── .env
+├── requirements.txt
+├── assets/
+│
+├── utils/
+│   ├── transcript.py
+│   ├── translation.py
+│   ├── vector_store.py
+│
+└── README.md
+```
+
+---
+
+## Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/yourusername/YTubeMind.git
+cd YTubeMind
+```
+
+### Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+### Activate Virtual Environment
+
+#### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+#### Linux / Mac
+
+```bash
+source venv/bin/activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Environment Variables
+
+Create a `.env` file in the root directory.
+
+```env
+GEMINI_API_KEY=YOUR_API_KEY
+```
+
+Get your Gemini API key from Google AI Studio.
+
+---
+
+## Run Application
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## How to Use
+
+1. Launch the application.
+2. Paste a YouTube video URL.
+3. Click **Process Video**.
+4. Wait for transcript extraction and indexing.
+5. View the transcript in the original or English language.
+6. Ask questions in the chat section.
+7. Receive AI-generated answers grounded in the video content.
+
+
+## Key Capabilities
+
+* Semantic retrieval over transcript chunks using vector search.
+* Transcript-grounded responses.
+* Multilingual video understanding.
+* Context-aware conversational search.
+* Real-time AI-powered question answering.
