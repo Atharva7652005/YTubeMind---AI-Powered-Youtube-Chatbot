@@ -1,6 +1,6 @@
 # YTubeMind
 
-YTubeMind is an AI-powered YouTube chatbot that transforms YouTube videos into interactive knowledge sources. Users can provide a YouTube video URL, view its transcript, access English translations for multilingual videos, and ask natural language questions about the video content. The application leverages Retrieval-Augmented Generation (RAG) to deliver accurate, context-aware responses grounded in the video's transcript.
+YTubeMind is a YouTube chatbot that transforms YouTube videos into interactive knowledge sources. Users can provide a YouTube video URL, view its transcript, access English translations for multilingual videos, and ask natural language questions about the video content. The application leverages Retrieval-Augmented Generation (RAG) to deliver accurate, context-aware responses grounded in the video's transcript.
 
 ---
 
